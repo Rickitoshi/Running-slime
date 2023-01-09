@@ -5,35 +5,34 @@ namespace Game.Player
 {
     public class InputHandler: ITickable
     {
-        private const float DEAD_ZONE = 0.004f;
+        private const float SWIPE_DEAD_ZONE = 0.003f;
+        private const int TOUCH_FRAME_DEAD_ZONE = 3;
     
         public bool IsLeftSwipe { get; private set; }
         public bool IsRightSwipe { get; private set; }
-        public bool IsTouch => _isTouched;
+        public bool IsTouch { get; private set; }
 
         private Vector3 _prevPos = Vector3.zero;
         private Vector2 _normalizeDelta =  Vector2.zero;
         private bool _isHold;
         private bool _isTouched;
         private bool _isSwiped;
+        private int _holdFrameCount;
 
         public void Tick()
         {
-            if (_isTouched)
-            {
-                _isTouched = false;
-            }
-
             if (Input.GetMouseButtonDown(0))
             {
                 _isHold = true;
-                _isTouched = true;
                 _prevPos = Input.mousePosition;
             }
 
             if (Input.GetMouseButtonUp(0))
             {
                 _isHold = false;
+                _holdFrameCount = 0;
+                _isTouched = false;
+                _isSwiped = false;
                 _prevPos = Vector3.zero;
             }
             
@@ -41,9 +40,22 @@ namespace Game.Player
             {
                 CalculateDelta();
 
+                _holdFrameCount++;
+
+                if (_isSwiped)
+                {
+                    IsRightSwipe = false;
+                    IsLeftSwipe = false;
+                }
+
+                if (_isTouched)
+                {
+                    IsTouch = false;
+                }
+
                 if (_normalizeDelta != Vector2.zero)
                 {
-                    if (Mathf.Abs(_normalizeDelta.x) > DEAD_ZONE && !_isSwiped)
+                    if (Mathf.Abs(_normalizeDelta.x) > SWIPE_DEAD_ZONE && !_isSwiped && !_isTouched)
                     {
                         _isSwiped = true;
 
@@ -53,13 +65,13 @@ namespace Game.Player
                 }
                 else
                 {
-                    IsRightSwipe = false;
-                    IsLeftSwipe = false;
+                    if (_holdFrameCount >= TOUCH_FRAME_DEAD_ZONE && !_isTouched && !_isSwiped)
+                    {
+                        IsTouch = true;
+                        _isTouched = true;
+                    }
                 }
-            }
-            else
-            {
-                _isSwiped = false;
+                
             }
         }
 

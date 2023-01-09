@@ -31,6 +31,15 @@ namespace Game.Player
                 playerMoveSystem.Jump();
                 _animationController.SetJump();
             }
+            if (_inputHandler.IsLeftSwipe)
+            {
+               print("LeftSwipe");
+            }
+
+            if (_inputHandler.IsRightSwipe)
+            {
+                print("RightSwipe");
+            }
         }
     }
 }
