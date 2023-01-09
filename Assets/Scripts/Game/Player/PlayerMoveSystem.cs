@@ -25,6 +25,7 @@ public class PlayerMoveSystem : MonoBehaviour
     }
 
     public bool IsGrounded => _groundCheckSystem.IsGrounded;
+    public bool IsStrafe { get; private set; }
 
     private float _jumpDuration;
     private float _jumpDistance;
@@ -35,6 +36,7 @@ public class PlayerMoveSystem : MonoBehaviour
     private GroundCheckSystem _groundCheckSystem;
     private Vector3 _velocity;
     private bool _isActive;
+    private Tween _strafeTween;
 
     private void Awake()
     {
@@ -51,9 +53,21 @@ public class PlayerMoveSystem : MonoBehaviour
     }
 
     
-    private void Strafe()
+    public void Strafe(StrafeDirection direction)
     {
-        transform.DOMoveX(transform.position.x + _strafeDistance, _strafeDuration);
+        IsStrafe = true;
+        
+        if (direction == StrafeDirection.Right)
+        {
+            _strafeTween = transform.DOMoveX(transform.position.x + _strafeDistance, _strafeDuration);
+        }
+        else
+        {
+            _strafeTween = transform.DOMoveX(transform.position.x - _strafeDistance, _strafeDuration);
+        }
+
+        _strafeTween.SetEase(Ease.OutQuad);
+        _strafeTween.OnComplete(() => { IsStrafe = false; });
     }
 
     public void Jump()
@@ -65,5 +79,11 @@ public class PlayerMoveSystem : MonoBehaviour
     public void ResetBehaviour()
     {
         DOTween.Kill(transform);
+    }
+    
+    public enum StrafeDirection
+    {
+        Left,
+        Right
     }
 }

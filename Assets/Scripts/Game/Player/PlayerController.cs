@@ -26,20 +26,26 @@ namespace Game.Player
 
         private void Update()
         {
-            if (_inputHandler.IsTouch && playerMoveSystem.IsGrounded)
+            if(!playerMoveSystem.IsGrounded) return;
+            
+            if (_inputHandler.IsTouch)
             {
                 playerMoveSystem.Jump();
                 _animationController.SetJump();
             }
+
+            if(playerMoveSystem.IsStrafe) return;
+            
             if (_inputHandler.IsLeftSwipe)
             {
-               print("LeftSwipe");
+                playerMoveSystem.Strafe(PlayerMoveSystem.StrafeDirection.Left);
             }
-
+            
             if (_inputHandler.IsRightSwipe)
             {
-                print("RightSwipe");
+                playerMoveSystem.Strafe(PlayerMoveSystem.StrafeDirection.Right);
             }
+            
         }
     }
 }

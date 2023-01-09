@@ -29,6 +29,8 @@ namespace Game.Player
 
             if (Input.GetMouseButtonUp(0))
             {
+                IsTouch = false;
+                
                 _isHold = false;
                 _holdFrameCount = 0;
                 _isTouched = false;
