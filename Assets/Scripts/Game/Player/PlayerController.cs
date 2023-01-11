@@ -8,6 +8,7 @@ namespace Game.Player
     {
         [SerializeField] private PlayerMoveSystem playerMoveSystem;
         [SerializeField] private PlayerAnimationController _animationController;
+        [SerializeField] private DestructionSystem _destructionSystem;
 
         private InputHandler _inputHandler;
         private PlayerConfig _playerConfig;
@@ -45,7 +46,16 @@ namespace Game.Player
             {
                 playerMoveSystem.Strafe(PlayerMoveSystem.StrafeDirection.Right);
             }
+
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                _destructionSystem.Destruction();
+            }
             
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                _destructionSystem.Recovery();
+            }
         }
     }
 }

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 990864dc72bb4daaa75f1efcd29cd1db, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  jumpDistance: 3
-  jumpDuration: 0.4
+  jumpDistance: 2
+  jumpDuration: 0.35
   jumpHeight: 2
   strafeDistance: 2
-  strafeDuration: 1
+  strafeDuration: 0.35
