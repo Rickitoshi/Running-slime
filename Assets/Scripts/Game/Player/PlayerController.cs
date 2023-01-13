@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -7,8 +6,9 @@ namespace Game.Player
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private PlayerMoveSystem playerMoveSystem;
-        [SerializeField] private PlayerAnimationController _animationController;
-        [SerializeField] private DestructionSystem _destructionSystem;
+        [SerializeField] private PlayerAnimationController animationController;
+        [SerializeField] private DestructionSystem destructionSystem;
+        [SerializeField] private HealthSystem healthSystem;
 
         private InputHandler _inputHandler;
         private PlayerConfig _playerConfig;
@@ -20,6 +20,16 @@ namespace Game.Player
             _playerConfig = playerConfig;
         }
 
+        private void Awake()
+        {
+            healthSystem.OnDie += OnDie;
+        }
+        
+        private void OnDestroy()
+        {
+            healthSystem.OnDie -= OnDie;
+        }
+
         private void Start()
         {
             playerMoveSystem.Initialize(_playerConfig);
@@ -27,12 +37,13 @@ namespace Game.Player
 
         private void Update()
         {
+            if(!healthSystem.IsAlive) return;
             if(!playerMoveSystem.IsGrounded) return;
             
             if (_inputHandler.IsTouch)
             {
                 playerMoveSystem.Jump();
-                _animationController.SetJump();
+                animationController.SetJump();
             }
 
             if(playerMoveSystem.IsStrafe) return;
@@ -46,16 +57,12 @@ namespace Game.Player
             {
                 playerMoveSystem.Strafe(PlayerMoveSystem.StrafeDirection.Right);
             }
-
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                _destructionSystem.Destruction();
-            }
-            
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                _destructionSystem.Recovery();
-            }
         }
+
+        private void OnDie()
+        {
+            destructionSystem.Explosion(1);
+        }
+        
     }
 }

@@ -5,6 +5,8 @@ using DG.Tweening;
 [RequireComponent(typeof(GroundCheckSystem))]
 public class PlayerMoveSystem : MonoBehaviour
 {
+    [SerializeField] private float gravityValue = -9.81f;
+    
     public bool IsActive
     {
         get => _isActive;
@@ -43,6 +45,11 @@ public class PlayerMoveSystem : MonoBehaviour
         _groundCheckSystem = GetComponent<GroundCheckSystem>();
     }
 
+    private void FixedUpdate()
+    {
+        Gravity();
+    }
+    
     public void Initialize(PlayerConfig playerConfig)
     {
         _jumpDistance = playerConfig.JumpDistance;
@@ -52,6 +59,17 @@ public class PlayerMoveSystem : MonoBehaviour
         _strafeDistance = playerConfig.StrafeDistance;
     }
 
+    private void Gravity()
+    {
+        _velocity.y += gravityValue * Time.deltaTime;
+        
+        if (_groundCheckSystem.IsGrounded && _velocity.y < 0)
+        {
+            _velocity.y = 0f;
+        }
+        
+        transform.position += _velocity * Time.deltaTime;
+    }
     
     public void Strafe(StrafeDirection direction)
     {
@@ -72,8 +90,10 @@ public class PlayerMoveSystem : MonoBehaviour
 
     public void Jump()
     {
-        DOTween.Complete(transform);
-        transform.DOJump(transform.position + Vector3.forward * _jumpDistance, _jumpHeight, 1, _jumpDuration).SetEase(Ease.InOutCubic);
+        //DOTween.Complete(transform);
+        //transform.DOJump(transform.position + Vector3.forward * _jumpDistance, _jumpHeight, 1, _jumpDuration).SetEase(Ease.InOutCubic);
+        transform.DOMoveZ(transform.position.z + _jumpDistance, _jumpDuration).SetEase(Ease.Linear);
+        _velocity.y += Mathf.Sqrt(_jumpHeight * -2.0f * gravityValue);
     }
 
     public void ResetBehaviour()

@@ -1,7 +1,7 @@
-using System;
+using Game.Traps;
 using UnityEngine;
 
-public class Rock : MonoBehaviour
+public class Rock : Obstacle
 {
     [SerializeField] private float moveSpeed;
    

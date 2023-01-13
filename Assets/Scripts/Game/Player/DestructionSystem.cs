@@ -1,58 +1,45 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DestructionSystem : MonoBehaviour
 {
     private Rigidbody[] _rigidbody;
-    private readonly List<Vector3> _partsDefaultPosition = new();
 
     private void Awake()
     {
         _rigidbody = GetComponentsInChildren<Rigidbody>();
-
-        foreach (var body in _rigidbody)
-        {
-            _partsDefaultPosition.Add(body.transform.localPosition);
-        }
-        
-        gameObject.AddComponent<Rigidbody>().useGravity = false;
     }
 
     private void Start()
     {
-        SetKinematic(true);
-    }
-    
-    private void SetKinematic(bool value)
-    {
-        foreach (var body in _rigidbody)
-        {
-            body.isKinematic = value;
-        }
+        Recovery();
     }
 
     public void Destruction()
     {
-        SetKinematic(false);
+        foreach (var body in _rigidbody)
+        {
+            body.isKinematic = false;
+        }
     }
     
-    public void Destruction(float impulseForce, Vector3 direction)
+    public void Explosion(float impulseForce)
     {
         foreach (var body in _rigidbody)
         {
             body.isKinematic = false;
-            body.AddForce(direction * impulseForce, ForceMode.Impulse);
+            Vector3 randomDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(0, 1f), Random.Range(-1f, 1f));
+            body.AddForce(randomDirection * impulseForce, ForceMode.Impulse);
         }
     }
 
     public void Recovery()
     {
-        SetKinematic(true);
-        
-        for (int i = 0; i < _rigidbody.Length; i++)
+        foreach (var body in _rigidbody)
         {
-            _rigidbody[i].transform.localPosition = _partsDefaultPosition[i];
-            _rigidbody[i].transform.localRotation = Quaternion.identity;
+            body.isKinematic = true;
+            Transform bodyTransform = body.transform;
+            bodyTransform.localPosition = Vector3.zero;
+            bodyTransform.localRotation = Quaternion.identity;
         }
     }
 }
