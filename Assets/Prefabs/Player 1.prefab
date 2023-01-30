@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2895712601021804479}
   - component: {fileID: 952453743795290654}
-  - component: {fileID: 9006812428001279042}
   - component: {fileID: 5931048333967004012}
   - component: {fileID: 3040135264741762818}
   - component: {fileID: 1951408033321477166}
@@ -55,22 +54,6 @@ MonoBehaviour:
   animationController: {fileID: 3040135264741762818}
   destructionSystem: {fileID: 8744465925234663255}
   healthSystem: {fileID: 1951408033321477166}
---- !u!114 &9006812428001279042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2895712601021804478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afe8e2aa784246d1a67333694ece6618, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundDistance: 0.2
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!114 &5931048333967004012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,6 +66,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65f478abbe86ccf40a6c7f7794ed07e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &3040135264741762818
 MonoBehaviour:
   m_ObjectHideFlags: 0

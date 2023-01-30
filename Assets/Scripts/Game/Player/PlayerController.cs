@@ -38,7 +38,7 @@ namespace Game.Player
         private void Update()
         {
             if(!healthSystem.IsAlive) return;
-            if(!playerMoveSystem.IsGrounded) return;
+            if(playerMoveSystem.IsJumping) return;
             
             if (_inputHandler.IsTouch)
             {
@@ -51,11 +51,13 @@ namespace Game.Player
             if (_inputHandler.IsLeftSwipe)
             {
                 playerMoveSystem.Strafe(PlayerMoveSystem.StrafeDirection.Left);
+                animationController.SetStrafe(PlayerMoveSystem.StrafeDirection.Left);
             }
             
             if (_inputHandler.IsRightSwipe)
             {
                 playerMoveSystem.Strafe(PlayerMoveSystem.StrafeDirection.Right);
+                animationController.SetStrafe(PlayerMoveSystem.StrafeDirection.Right);
             }
         }
 
