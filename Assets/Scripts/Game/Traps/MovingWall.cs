@@ -17,7 +17,7 @@ namespace Game.Traps
 
         private void Start()
         {
-            _transform.DOLocalMoveZ(endPoint.localPosition.z, moveDuration).SetLoops(-1,LoopType.Yoyo).SetEase(Ease.InOutSine);
+            _transform.DOLocalMoveZ(endPoint.localPosition.z, moveDuration).SetLoops(-1,LoopType.Yoyo).SetEase(Ease.InOutQuad);
         }
 
     }

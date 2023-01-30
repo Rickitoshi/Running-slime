@@ -11,7 +11,7 @@ namespace Game.Dungeon_Part
 
         private Vector3[] _positions;
         private int _positionsCount;
-        
+
         private void Awake()
         {
             _positions = bridgePositions.Select(transform1 => transform1.position).ToArray();
