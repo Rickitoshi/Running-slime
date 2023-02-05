@@ -312,6 +312,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4288431914226929663}
     m_Modifications:
+    - target: {fileID: 2862849007353596856, guid: 0fbfd03084f354b4ea9a53d62e2f7188, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5871842126575643099, guid: 0fbfd03084f354b4ea9a53d62e2f7188, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -360,6 +364,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Land (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6500710634970641249, guid: 0fbfd03084f354b4ea9a53d62e2f7188, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fbfd03084f354b4ea9a53d62e2f7188, type: 3}
 --- !u!4 &7251850194798013279 stripped
@@ -379,9 +387,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4288431914226929663}
     m_Modifications:
+    - target: {fileID: 766538311262749460, guid: 35987989d8db6f34da72a9364f70f1d8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8587943823863725005, guid: 35987989d8db6f34da72a9364f70f1d8, type: 3}
       propertyPath: m_Name
       value: Rock
+      objectReference: {fileID: 0}
+    - target: {fileID: 8587943823863725005, guid: 35987989d8db6f34da72a9364f70f1d8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8963660538673914231, guid: 35987989d8db6f34da72a9364f70f1d8, type: 3}
       propertyPath: m_RootOrder
@@ -446,6 +462,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4288431914226929663}
     m_Modifications:
+    - target: {fileID: 2862849007353596856, guid: 0fbfd03084f354b4ea9a53d62e2f7188, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5871842126575643099, guid: 0fbfd03084f354b4ea9a53d62e2f7188, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -493,6 +513,10 @@ PrefabInstance:
     - target: {fileID: 6500710634970641249, guid: 0fbfd03084f354b4ea9a53d62e2f7188, type: 3}
       propertyPath: m_Name
       value: Land
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500710634970641249, guid: 0fbfd03084f354b4ea9a53d62e2f7188, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fbfd03084f354b4ea9a53d62e2f7188, type: 3}

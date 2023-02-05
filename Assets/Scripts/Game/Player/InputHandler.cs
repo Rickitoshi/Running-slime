@@ -6,7 +6,7 @@ namespace Game.Player
     public class InputHandler: ITickable
     {
         private const float SWIPE_DEAD_ZONE = 0.003f;
-        private const int TOUCH_FRAME_DEAD_ZONE = 3;
+        private const int TOUCH_FRAME_DEAD_ZONE = 4;
     
         public bool IsLeftSwipe { get; private set; }
         public bool IsRightSwipe { get; private set; }
