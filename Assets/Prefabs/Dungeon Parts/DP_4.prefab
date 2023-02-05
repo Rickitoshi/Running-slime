@@ -678,10 +678,6 @@ PrefabInstance:
       propertyPath: endPoint
       value: 
       objectReference: {fileID: 6685798089818868906}
-    - target: {fileID: 8626758821920138887, guid: 0360d310ba7477f4cad0d4fdd265795d, type: 3}
-      propertyPath: moveDuration
-      value: 1.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0360d310ba7477f4cad0d4fdd265795d, type: 3}
 --- !u!4 &1974002040674730283 stripped
