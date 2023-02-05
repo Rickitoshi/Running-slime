@@ -152,6 +152,10 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: e8c7de7fbe291ab4da7ad81fcba7b10b, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e8c7de7fbe291ab4da7ad81fcba7b10b, type: 3}
       propertyPath: m_Name
       value: Rock-0
