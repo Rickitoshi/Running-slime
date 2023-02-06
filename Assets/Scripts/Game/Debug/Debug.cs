@@ -1,22 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-using ShadowQuality = UnityEngine.ShadowQuality;
 
 public class Debug : MonoBehaviour
 {
-    [SerializeField] private UniversalRenderPipelineAsset noShadows;
-    [SerializeField] private UniversalRenderPipelineAsset shadows;
+    [SerializeField] private UniversalRenderPipelineAsset high;
+    [SerializeField] private UniversalRenderPipelineAsset low;
     
-    public void OnShadows()
+    public void Medium()
     {
-        GraphicsSettings.renderPipelineAsset = shadows;
+        GraphicsSettings.renderPipelineAsset = high;
+        QualitySettings.renderPipeline = high;
     }
     
-    public void OffShadows()
+    public void Low()
     {
-        GraphicsSettings.renderPipelineAsset = noShadows;
+        GraphicsSettings.renderPipelineAsset = low;
+        QualitySettings.renderPipeline = low;
     }
 }

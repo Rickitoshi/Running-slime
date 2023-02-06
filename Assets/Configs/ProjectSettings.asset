@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 753be361178c44c9bcf6410a5c432db1, type: 3}
   m_Name: ProjectSettings
   m_EditorClassIdentifier: 
-  targetFPS: 500
+  targetFPS: 60
   useMultitouch: 0
