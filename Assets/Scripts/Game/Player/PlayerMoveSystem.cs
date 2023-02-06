@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Game.Player;
 using DG.Tweening;
@@ -35,6 +36,7 @@ public class PlayerMoveSystem : MonoBehaviour
     private float _strafeDistance;
     
     private Transform _transform;
+    private Vector3 _startPosition;
     private Vector3 _velocity;
     private bool _isActive;
     private Tween _strafeTween;
@@ -43,8 +45,12 @@ public class PlayerMoveSystem : MonoBehaviour
     {
         _transform = GetComponent<Transform>();
     }
-    
-    
+
+    private void Start()
+    {
+        _startPosition = _transform.position;
+    }
+
     public void Initialize(PlayerConfig playerConfig)
     {
         _jumpDistance = playerConfig.JumpDistance;
@@ -90,9 +96,11 @@ public class PlayerMoveSystem : MonoBehaviour
             : _transform.position;
     }
 
-    public void ResetBehaviour()
+    public void Reset()
     {
         DOTween.Kill(_transform);
+        IsJumping = false;
+        _transform.position = _startPosition;
     }
     
     public enum StrafeDirection

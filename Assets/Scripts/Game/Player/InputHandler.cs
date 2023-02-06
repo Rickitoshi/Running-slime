@@ -6,7 +6,7 @@ namespace Game.Player
     public class InputHandler: ITickable
     {
         private const float SWIPE_DEAD_ZONE = 0.003f;
-        private const int TOUCH_FRAME_DEAD_ZONE = 4;
+        private const float CHECK_TOUCH_TIME = 0.05f;
     
         public bool IsLeftSwipe { get; private set; }
         public bool IsRightSwipe { get; private set; }
@@ -17,7 +17,7 @@ namespace Game.Player
         private bool _isHold;
         private bool _isTouched;
         private bool _isSwiped;
-        private int _holdFrameCount;
+        private float _holdTime;
 
         public void Tick()
         {
@@ -29,49 +29,47 @@ namespace Game.Player
 
             if (Input.GetMouseButtonUp(0))
             {
-                IsTouch = false;
-                
+                _holdTime = 0;
                 _isHold = false;
-                _holdFrameCount = 0;
+                _prevPos = Vector3.zero;
+                
+                IsTouch = false;
                 _isTouched = false;
                 _isSwiped = false;
-                _prevPos = Vector3.zero;
             }
             
             if (_isHold)
             {
+                _holdTime += Time.deltaTime;
+
                 CalculateDelta();
-
-                _holdFrameCount++;
-
-                if (_isSwiped)
+                
+                if (!_isSwiped && !_isTouched)
                 {
-                    IsRightSwipe = false;
-                    IsLeftSwipe = false;
-                }
-
-                if (_isTouched)
-                {
-                    IsTouch = false;
-                }
-
-                if (_normalizeDelta != Vector2.zero)
-                {
-                    if (Mathf.Abs(_normalizeDelta.x) > SWIPE_DEAD_ZONE && !_isSwiped && !_isTouched)
+                    if (_holdTime <= CHECK_TOUCH_TIME)
                     {
-                        _isSwiped = true;
+                        if (_normalizeDelta != Vector2.zero)
+                        {
+                            if (Mathf.Abs(_normalizeDelta.x) > SWIPE_DEAD_ZONE)
+                            {
+                                _isSwiped = true;
 
-                        IsRightSwipe = _normalizeDelta.x > 0;
-                        IsLeftSwipe = _normalizeDelta.x < 0;
+                                IsRightSwipe = _normalizeDelta.x > 0;
+                                IsLeftSwipe = _normalizeDelta.x < 0;
+                            }
+                        }
                     }
-                }
-                else
-                {
-                    if (_holdFrameCount >= TOUCH_FRAME_DEAD_ZONE && !_isTouched && !_isSwiped)
+                    else
                     {
                         IsTouch = true;
                         _isTouched = true;
                     }
+                }
+                else
+                {
+                    IsRightSwipe = false;
+                    IsLeftSwipe = false;
+                    IsTouch = false;
                 }
                 
             }

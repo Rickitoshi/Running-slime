@@ -65,6 +65,13 @@ namespace Game.Player
         {
             destructionSystem.Explosion(1);
         }
+
+        public void Restart()
+        {
+            healthSystem.Reset();
+            destructionSystem.Recovery();
+            playerMoveSystem.Reset();
+        }
         
     }
 }
