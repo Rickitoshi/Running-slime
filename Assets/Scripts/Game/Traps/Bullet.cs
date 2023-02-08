@@ -32,7 +32,6 @@ namespace Game.Traps
         
         public void Move()
         {
-            print(CalculateEndPoint());
             _transform.DOMove(CalculateEndPoint(), moveDuration).SetEase(Ease.Linear);
         }
         
