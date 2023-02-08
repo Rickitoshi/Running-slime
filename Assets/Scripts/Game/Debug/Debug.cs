@@ -18,4 +18,9 @@ public class Debug : MonoBehaviour
         GraphicsSettings.renderPipelineAsset = low;
         QualitySettings.renderPipeline = low;
     }
+
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }

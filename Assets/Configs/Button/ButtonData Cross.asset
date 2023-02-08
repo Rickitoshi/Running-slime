@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1983cd7f8fa74b42af43d00c3520e15e, type: 3}
+  m_Name: ButtonData Cross
+  m_EditorClassIdentifier: 
+  buttonView: {fileID: -2432090755550338912, guid: f31480150c3d08444b2c8777032ef7e4, type: 3}
+  buttonType: 1
+  stoneView: {fileID: -2432090755550338912, guid: 8276217d5edd52641a43d0f2bb2fd749, type: 3}

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1983cd7f8fa74b42af43d00c3520e15e, type: 3}
+  m_Name: ButtonData Plus
+  m_EditorClassIdentifier: 
+  buttonView: {fileID: -2432090755550338912, guid: 5c093038a0fe7ad4683ee1dfcc75af2b, type: 3}
+  buttonType: 2
+  stoneView: {fileID: -2432090755550338912, guid: 6b1c6df7cdd2d764b84453499b1afdd4, type: 3}
