@@ -152,7 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
 --- !u!114 &3040135264741762818
 MonoBehaviour:
   m_ObjectHideFlags: 0

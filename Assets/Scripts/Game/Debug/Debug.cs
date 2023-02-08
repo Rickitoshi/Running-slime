@@ -9,13 +9,11 @@ public class Debug : MonoBehaviour
     
     public void Medium()
     {
-        GraphicsSettings.renderPipelineAsset = high;
         QualitySettings.renderPipeline = high;
     }
     
     public void Low()
     {
-        GraphicsSettings.renderPipelineAsset = low;
         QualitySettings.renderPipeline = low;
     }
 
