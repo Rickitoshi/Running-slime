@@ -22,7 +22,7 @@ namespace Game.Traps
         
         public void Reset()
         {
-            _transform.position = Vector3.zero;
+            _transform.localPosition = Vector3.zero;
         }
     }
 }

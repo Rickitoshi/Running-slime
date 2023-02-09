@@ -9,11 +9,11 @@ namespace Game.Buildings
     { 
         [SerializeField] private float endPositionY;
         [SerializeField] private float moveDuration = 1;
+        [SerializeField] private MeshFilter meshFilter;
 
         public event Action<ButtonType> OnPressed;
         
         private ButtonType _type;
-        private MeshFilter _meshFilter;
         private Transform _transform;
         private Vector3 _startPosition;
         private bool _isActive;
@@ -21,8 +21,7 @@ namespace Game.Buildings
         private void Awake()
         {
             _transform = transform;
-            _meshFilter = GetComponentInChildren<MeshFilter>();
-            _startPosition = _transform.position;
+            _startPosition = _transform.localPosition;
             _isActive = true;
         }
 
@@ -40,12 +39,12 @@ namespace Game.Buildings
         public void Initialize(ButtonType type, Mesh view)
         {
             _type = type;
-            _meshFilter.mesh = view;
+            meshFilter.mesh = view;
         }
         
         public void Reset()
         {
-            _transform.position = _startPosition;
+            _transform.localPosition = _startPosition;
             _isActive = true;
         }
     }

@@ -16,11 +16,7 @@ namespace Game.Traps
         private void Awake()
         {
             _transform = transform;
-        }
-
-        private void Start()
-        {
-            _startPosition = _transform.position;
+            _startPosition = _transform.localPosition;
         }
 
         private Vector3 CalculateEndPoint()
@@ -37,7 +33,7 @@ namespace Game.Traps
         
         public void Reset()
         {
-            _transform.position = _startPosition;
+            _transform.localPosition = _startPosition;
         }
     }
 }

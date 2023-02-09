@@ -4,16 +4,11 @@ namespace Game.Buildings
 {
     public class HintStone : MonoBehaviour
     {
-        private MeshFilter _meshFilter;
+       [SerializeField] private MeshFilter meshFilter;
 
-        private void Awake()
+       public void Initialize(Mesh view)
         {
-            _meshFilter = GetComponentInChildren<MeshFilter>();
-        }
-
-        public void Initialize(Mesh view)
-        {
-            _meshFilter.mesh = view;
+            meshFilter.mesh = view;
         }
     }
 }

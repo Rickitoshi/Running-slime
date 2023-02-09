@@ -44,6 +44,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4288431914226929663}
   - component: {fileID: 6372259364230538320}
+  - component: {fileID: 7982041289049778111}
   m_Layer: 3
   m_Name: DP_5
   m_TagString: Untagged
@@ -87,6 +88,19 @@ MonoBehaviour:
   - {fileID: 1472100175309221414}
   - {fileID: 3220430718718092459}
   - {fileID: 8063818244084478437}
+--- !u!65 &7982041289049778111
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3515132859692193093}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2, y: 2, z: 7.5}
+  m_Center: {x: -5.9, y: 1, z: 0}
 --- !u!1 &5153433598195717647
 GameObject:
   m_ObjectHideFlags: 0
