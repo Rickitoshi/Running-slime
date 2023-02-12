@@ -2299,6 +2299,7 @@ MonoBehaviour:
   - {fileID: 6372259364230538320, guid: bdbb5a4aa4182674fa57232ea1590ce8, type: 3}
   - {fileID: 1033084257094047525, guid: 309bf443431901b438c6bf7b7ab26d7d, type: 3}
   - {fileID: 5631815745829401086, guid: 492d8163e9bd74e4f97703a46cb59b52, type: 3}
+  - {fileID: 7601460121777394187, guid: 4a61e5a2f77058c42bab79f7600d03df, type: 3}
   playParts: 5
   roadPartLenght: 4
 --- !u!4 &1969288821

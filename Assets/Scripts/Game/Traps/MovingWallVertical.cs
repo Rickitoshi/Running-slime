@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -9,10 +10,12 @@ namespace Game.Traps
         [SerializeField] private Transform endPoint;
 
         private Transform _transform;
+        private Vector3 _startPosition;
 
         private void Awake()
         {
             _transform = transform;
+            _startPosition = _transform.localPosition;
         }
 
         public void Disarm()
@@ -22,7 +25,7 @@ namespace Game.Traps
         
         public void Reset()
         {
-            _transform.localPosition = Vector3.zero;
+            _transform.localPosition = _startPosition;
         }
     }
 }
