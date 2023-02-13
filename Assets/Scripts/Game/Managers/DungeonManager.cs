@@ -6,7 +6,6 @@ public class DungeonManager : MonoBehaviour
 {
     [SerializeField] private DungeonPart[] partsPool;
     [SerializeField] private int playParts = 4;
-    [SerializeField] private float roadPartLenght = 4f;
 
     private Queue<DungeonPart> _currentRoad;
     private List<DungeonPart> _instantiatedDungeonParts;
@@ -48,7 +47,7 @@ public class DungeonManager : MonoBehaviour
 
     private void SetDefaultPosition()
     {
-        _partPosition = new Vector3(0, 0, roadPartLenght);
+        _partPosition = new Vector3(0, 0, 0);
     }
     
     private void GetPart()
@@ -60,7 +59,7 @@ public class DungeonManager : MonoBehaviour
         _partObject = _instantiatedDungeonParts[index];
         _instantiatedDungeonParts.Remove(_partObject);
         _partObject.Activate(_partPosition);
-        _partPosition.z += roadPartLenght;
+        _partPosition.z += _partObject.Lenght;
         _currentRoad.Enqueue(_partObject);
     }
 

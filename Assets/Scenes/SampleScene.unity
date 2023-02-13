@@ -19,7 +19,7 @@ RenderSettings:
   m_FogMode: 1
   m_FogDensity: 0.05
   m_LinearFogStart: 20
-  m_LinearFogEnd: 35
+  m_LinearFogEnd: 29
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
@@ -494,7 +494,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5349705393254291381, guid: b4316eaac71ff9b4491df69374ad6c5c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 5349705393254291381, guid: b4316eaac71ff9b4491df69374ad6c5c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1058,8 +1058,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.35054952, y: -0.037465833, z: 0.0140363155, w: 0.9356892}
-  m_LocalPosition: {x: 1.0623965, y: 16.261509, z: -13.245123}
+  m_LocalRotation: {x: 0.32623172, y: -0.036153406, z: 0.012487235, w: 0.9445157}
+  m_LocalPosition: {x: 0.96128976, y: 15.647335, z: -14.538564}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1445,8 +1445,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1336338795}
-  m_LocalRotation: {x: 0.35054952, y: -0.037465833, z: 0.0140363155, w: 0.9356892}
-  m_LocalPosition: {x: 1.22, y: 14, z: -15.21}
+  m_LocalRotation: {x: 0.32623172, y: -0.036153406, z: 0.012487235, w: 0.9445157}
+  m_LocalPosition: {x: 1.15, y: 12.5, z: -17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1466,7 +1466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44d70cc20219cd84593f67d248eafe36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Offset: {x: 0, y: 3, z: 0}
+  m_Offset: {x: 0, y: 4, z: 0}
   m_ApplyAfter: 1
   m_PreserveComposition: 0
 --- !u!1 &1384077329
@@ -1555,7 +1555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 1.22, y: 14, z: -15.21}
+  m_FollowOffset: {x: 1.15, y: 12.5, z: -15}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -1844,7 +1844,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1541001041}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2300,8 +2300,10 @@ MonoBehaviour:
   - {fileID: 1033084257094047525, guid: 309bf443431901b438c6bf7b7ab26d7d, type: 3}
   - {fileID: 5631815745829401086, guid: 492d8163e9bd74e4f97703a46cb59b52, type: 3}
   - {fileID: 7601460121777394187, guid: 4a61e5a2f77058c42bab79f7600d03df, type: 3}
-  playParts: 5
-  roadPartLenght: 4
+  - {fileID: 8296149196215483344, guid: 63be825d6f9cf90408a532ab2203724b, type: 3}
+  - {fileID: 5065473860733751754, guid: 5f56da1d1f8f9e74b889601a965a0fb9, type: 3}
+  - {fileID: 8615373696538092374, guid: db53bd582f6dcdb47808640fd3d085be, type: 3}
+  playParts: 6
 --- !u!4 &1969288821
 Transform:
   m_ObjectHideFlags: 0
@@ -2343,7 +2345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2895712601021804479, guid: f3c2c313e1fd6c944a187e470e3cdec6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 2895712601021804479, guid: f3c2c313e1fd6c944a187e470e3cdec6, type: 3}
       propertyPath: m_LocalRotation.w

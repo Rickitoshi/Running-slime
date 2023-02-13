@@ -241,5 +241,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8dff30ab4494e38a96227d8e90e694c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateDuration: 2.5
+  maxRotateDuration: 3
+  minRotateDuration: 2.6
   isInversion: 0

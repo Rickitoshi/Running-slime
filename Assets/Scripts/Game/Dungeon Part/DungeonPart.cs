@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class DungeonPart : MonoBehaviour
 {
+    [SerializeField] private float lenght = 4;
+    
     public event Action OnPlayerExit;
+    public float Lenght => lenght;
 
     private void OnTriggerEnter(Collider other)
     {
