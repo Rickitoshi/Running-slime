@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using Signals;
 using UnityEngine;
+using Zenject;
 using Random = UnityEngine.Random;
 
 public class DungeonManager : MonoBehaviour
@@ -7,11 +9,12 @@ public class DungeonManager : MonoBehaviour
     [SerializeField] private DungeonPart[] partsPool;
     [SerializeField] private int playParts = 4;
 
+    [Inject] private SignalBus _signalBus;
+    
     private Queue<DungeonPart> _currentRoad;
     private List<DungeonPart> _instantiatedDungeonParts;
     private DungeonPart _partObject;
     private Vector3 _partPosition;
-
 
     private void Awake()
     {
@@ -41,7 +44,7 @@ public class DungeonManager : MonoBehaviour
     {
         for (int i = 0; i < playParts; i++)
         {
-            GetPart();
+            TakePart();
         }
     }
 
@@ -50,7 +53,7 @@ public class DungeonManager : MonoBehaviour
         _partPosition = new Vector3(0, 0, 0);
     }
     
-    private void GetPart()
+    private void TakePart()
     {
         if (_instantiatedDungeonParts.Count == 0) 
             return;
@@ -63,7 +66,7 @@ public class DungeonManager : MonoBehaviour
         _currentRoad.Enqueue(_partObject);
     }
 
-    private void RemovePart()
+    private void ReturnPart()
     {
         if (_currentRoad.Count == 0)
             return;
@@ -73,12 +76,19 @@ public class DungeonManager : MonoBehaviour
         _instantiatedDungeonParts.Add(_partObject);
     }
 
-    private void RebuildRoad()
+    private void UpdateDungeon(PlayerJumpSignal signal)
     {
-        RemovePart();
-        GetPart();
+        if (_partPosition.z - signal.PositionZ <= 13)
+        {
+            TakePart();
+        }
+
+        if (signal.PositionZ - (_currentRoad.Peek().transform.position.z + _currentRoad.Peek().Lenght * 0.5f) >= 10)
+        {
+            ReturnPart();
+        }
     }
-    
+
     private void InstantiateRoadPool()
     {
         foreach (var part in partsPool)
@@ -91,18 +101,12 @@ public class DungeonManager : MonoBehaviour
 
     private void Subscribe()
     {
-        foreach (var part in _instantiatedDungeonParts)
-        {
-            part.OnPlayerExit += RebuildRoad;
-        }
+        _signalBus.Subscribe<PlayerJumpSignal>(UpdateDungeon);
     }
     
     private void Unsubscribe()
     {
-        foreach (var part in _instantiatedDungeonParts)
-        {
-            part.OnPlayerExit -= RebuildRoad;
-        }
+        _signalBus.Unsubscribe<PlayerJumpSignal>(UpdateDungeon);
     }
 
     public void Restart()
@@ -110,7 +114,7 @@ public class DungeonManager : MonoBehaviour
         int size = _currentRoad.Count;
         for (int i = 0; i < size; i++)
         {
-            RemovePart();
+            ReturnPart();
         }
 
         SetDefaultPosition();

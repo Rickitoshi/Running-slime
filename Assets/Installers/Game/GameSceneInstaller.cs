@@ -1,4 +1,5 @@
 using Game.Player;
+using Signals;
 using Zenject;
 
 public class GameSceneInstaller : MonoInstaller
@@ -12,6 +13,6 @@ public class GameSceneInstaller : MonoInstaller
     
     private void BindSignals()
     {
- 
+        Container.DeclareSignal<PlayerJumpSignal>();
     }
 }

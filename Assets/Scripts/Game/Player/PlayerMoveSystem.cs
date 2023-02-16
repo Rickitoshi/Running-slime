@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using Game.Player;
 using DG.Tweening;
+using Signals;
+using Zenject;
 
 public class PlayerMoveSystem : MonoBehaviour
 {
@@ -29,6 +31,8 @@ public class PlayerMoveSystem : MonoBehaviour
     public bool IsJumping { get; private set; }
     public bool IsStrafe { get; private set; }
 
+    [Inject] private SignalBus _signalBus;
+    
     private float _jumpDuration;
     private float _jumpDistance;
     private float _jumpHeight;
@@ -76,7 +80,7 @@ public class PlayerMoveSystem : MonoBehaviour
         _strafeTween.SetEase(Ease.OutQuad);
         _strafeTween.OnComplete(() => { IsStrafe = false; });
     }
-
+    
     public void Jump()
     {
         IsJumping = true;
@@ -84,6 +88,7 @@ public class PlayerMoveSystem : MonoBehaviour
         _transform.DOJump(CalculateJumpEndPoint(), _jumpHeight, 1, _jumpDuration).SetEase(Ease.InOutCubic).OnComplete(
             () =>
             {
+                _signalBus.Fire(new PlayerJumpSignal(_transform.position.z));
                 IsJumping = false;
             });
     }

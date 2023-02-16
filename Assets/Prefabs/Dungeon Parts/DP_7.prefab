@@ -391,7 +391,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8878559624114004847}
   - component: {fileID: 5631815745829401086}
-  - component: {fileID: 2927024010711027184}
   m_Layer: 3
   m_Name: DP_7
   m_TagString: Untagged
@@ -441,19 +440,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 64ded9a6bffeb674e86edec89967cc60, type: 2}
   - {fileID: 11400000, guid: ab88c6522a5f1264aacf0f822ae78733, type: 2}
   - {fileID: 11400000, guid: b6a0f32ad1a38f14eb646444362679d2, type: 2}
---- !u!65 &2927024010711027184
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8105681481558440405}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.2, y: 2, z: 7.5}
-  m_Center: {x: -5.9, y: 1, z: 0}
 --- !u!1001 &1658814674408484228
 PrefabInstance:
   m_ObjectHideFlags: 0

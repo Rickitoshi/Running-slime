@@ -1,3 +1,4 @@
+using Signals;
 using UnityEngine;
 using Zenject;
 
@@ -9,7 +10,7 @@ namespace Game.Player
         [SerializeField] private PlayerAnimationController animationController;
         [SerializeField] private DestructionSystem destructionSystem;
         [SerializeField] private HealthSystem healthSystem;
-
+        
         private InputHandler _inputHandler;
         private PlayerConfig _playerConfig;
 
