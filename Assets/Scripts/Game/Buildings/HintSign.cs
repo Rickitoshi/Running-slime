@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Game.Buildings
 {
-    public class HintStone : MonoBehaviour
+    public class HintSign : MonoBehaviour
     {
        [SerializeField] private MeshFilter meshFilter;
 

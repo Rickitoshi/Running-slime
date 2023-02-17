@@ -8,13 +8,13 @@ namespace Game.Buildings
     {
         [SerializeField] private Mesh buttonView;
         [SerializeField] private ButtonType buttonType;
-        [SerializeField] private Mesh stoneView;
+        [SerializeField] private Mesh signView;
 
 
         public Mesh ButtonView => buttonView;
 
         public ButtonType Type => buttonType;
 
-        public Mesh StoneView => stoneView;
+        public Mesh SignView => signView;
     }
 }

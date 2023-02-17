@@ -11,14 +11,14 @@ namespace Game.Dungeon_Part
         
         private MovingWallVertical _wall;
         private Gun _gun;
-        private HintStone _hintStone;
+        private HintSign hintSign;
         private DungeonButton[] _buttons;
         private ButtonType _correctButton;
 
         private void Awake()
         {
             _wall = GetComponentInChildren<MovingWallVertical>();
-            _hintStone = GetComponentInChildren<HintStone>();
+            hintSign = GetComponentInChildren<HintSign>();
             _gun = GetComponentInChildren<Gun>();
             _buttons = GetComponentsInChildren<DungeonButton>();
         }
@@ -37,7 +37,7 @@ namespace Game.Dungeon_Part
         {
             int index = Random.Range(0, _buttons.Length);
             _correctButton = (ButtonType)index;
-            _hintStone.Initialize(buttonData[index].StoneView);
+            hintSign.Initialize(buttonData[index].SignView);
         }
 
         private void OnDisable()

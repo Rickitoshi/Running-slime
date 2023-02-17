@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
   jumpDistance: 1
-  jumpDuration: 0.25
+  jumpDuration: 0.2
   jumpHeight: 1
   strafeDistance: 1
   strafeDuration: 0.25

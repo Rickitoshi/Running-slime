@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonView: {fileID: -2432090755550338912, guid: aa1887fd201eabf43ad21aa42235b92d, type: 3}
   buttonType: 0
-  stoneView: {fileID: -2432090755550338912, guid: 289333236eceea449b5a7b3b0956abc1, type: 3}
+  signView: {fileID: -2432090755550338912, guid: 7db74b46447515d409b504e199a0c690, type: 3}

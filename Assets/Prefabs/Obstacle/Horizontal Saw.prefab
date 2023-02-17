@@ -227,7 +227,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.22, y: 0.1, z: 3.58}
+  m_Size: {x: 0.2, y: 0.1, z: 3.2}
   m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!114 &7196606107632342747
 MonoBehaviour:
@@ -243,4 +243,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxRotateDuration: 3
   minRotateDuration: 2.6
-  isInversion: 0
