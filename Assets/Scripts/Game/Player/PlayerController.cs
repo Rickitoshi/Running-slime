@@ -13,12 +13,14 @@ namespace Game.Player
         
         private InputHandler _inputHandler;
         private PlayerConfig _playerConfig;
+        private SignalBus _signalBus;
 
         [Inject]
-        private void Construct(InputHandler inputHandler, PlayerConfig playerConfig)
+        private void Construct(InputHandler inputHandler, PlayerConfig playerConfig,SignalBus signalBus)
         {
             _inputHandler = inputHandler;
             _playerConfig = playerConfig;
+            _signalBus = signalBus;
         }
 
         private void Awake()
@@ -45,6 +47,7 @@ namespace Game.Player
             {
                 playerMoveSystem.Jump();
                 animationController.SetJump();
+                _signalBus.Fire<ScoreChangedSignal>();
             }
 
             if(playerMoveSystem.IsStrafe) return;

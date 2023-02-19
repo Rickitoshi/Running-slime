@@ -14,5 +14,8 @@ public class GameSceneInstaller : MonoInstaller
     private void BindSignals()
     {
         Container.DeclareSignal<PlayerJumpSignal>();
+        Container.DeclareSignal<ChangePanelUISignal>();
+        Container.DeclareSignal<CoinsCountChangedSignal>();
+        Container.DeclareSignal<ScoreChangedSignal>();
     }
 }
