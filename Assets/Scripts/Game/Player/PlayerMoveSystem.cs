@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Game.Player;
 using DG.Tweening;
@@ -27,23 +26,22 @@ public class PlayerMoveSystem : MonoBehaviour
             }
         }
     }
-
+    
     public bool IsJumping { get; private set; }
-    public bool IsStrafe { get; private set; }
 
     [Inject] private SignalBus _signalBus;
     
     private float _jumpDuration;
     private float _jumpDistance;
     private float _jumpHeight;
-    private float _strafeDuration;
-    private float _strafeDistance;
-    
+    private float _rotateDuration;
+
     private Transform _transform;
     private Vector3 _startPosition;
     private Vector3 _velocity;
     private bool _isActive;
     private Tween _strafeTween;
+    private LookDirection _currentLookDirection;
 
     private void Awake()
     {
@@ -60,45 +58,66 @@ public class PlayerMoveSystem : MonoBehaviour
         _jumpDistance = playerConfig.JumpDistance;
         _jumpDuration = playerConfig.JumpDuration;
         _jumpHeight = playerConfig.JumpHeight;
-        _strafeDuration = playerConfig.StrafeDuration;
-        _strafeDistance = playerConfig.StrafeDistance;
+        _rotateDuration = playerConfig.RotateDuration;
     }
 
     public void Strafe(StrafeDirection direction)
     {
-        IsStrafe = true;
-        
+
         if (direction == StrafeDirection.Right)
         {
-            _strafeTween = _transform.DOMoveX(_transform.position.x + _strafeDistance, _strafeDuration);
+            if(!IsCanStrafe(Vector3.right)) return;
+            
+            Rotate(LookDirection.Right);
+            Jump(CalculateJumpEndPoint(Vector3.right));
         }
         else
         {
-            _strafeTween = _transform.DOMoveX(_transform.position.x - _strafeDistance, _strafeDuration);
+            if(!IsCanStrafe(Vector3.left)) return;
+            
+            Rotate(LookDirection.Left);
+            Jump(CalculateJumpEndPoint(Vector3.left));
         }
-
-        _strafeTween.SetEase(Ease.OutQuad);
-        _strafeTween.OnComplete(() => { IsStrafe = false; });
     }
     
-    public void Jump()
+    public void JumpForward()
+    {
+        Rotate(LookDirection.Forward);
+        Jump(CalculateJumpEndPoint(Vector3.forward));
+        _signalBus.Fire(new PlayerJumpSignal(_transform.position.z));
+    }
+    
+    private void Jump(Vector3 endPoint)
     {
         IsJumping = true;
-        DOTween.Complete(_transform);
-        _transform.DOJump(CalculateJumpEndPoint(), _jumpHeight, 1, _jumpDuration).SetEase(Ease.InOutCubic).OnComplete(
+        _transform.DOJump(endPoint, _jumpHeight, 1, _jumpDuration).SetEase(Ease.InOutCubic).OnComplete(
             () =>
             {
-                _signalBus.Fire(new PlayerJumpSignal(_transform.position.z));
                 IsJumping = false;
             });
     }
-
-    private Vector3 CalculateJumpEndPoint()
+    
+    private void Rotate(LookDirection direction)
     {
-        Vector3 rayStartPoint = _transform.position +  Vector3.forward * _jumpDistance;
-        return Physics.Raycast(rayStartPoint, Vector3.down, out RaycastHit hit, 10f, groundLayerMask.value)
+        if (_currentLookDirection == direction) return;
+
+        DOTween.Kill(_transform);
+        _currentLookDirection = direction;
+        _transform.DORotate(new Vector3(0, (int)direction, 0), _rotateDuration);
+    }
+
+    private Vector3 CalculateJumpEndPoint(Vector3 direction)
+    {
+        Vector3 rayStartPoint = _transform.position +  direction * _jumpDistance;
+       return Physics.Raycast(rayStartPoint, Vector3.down, out RaycastHit hit, 5f, groundLayerMask.value)
             ? hit.point
             : _transform.position;
+    }
+    
+    private bool IsCanStrafe(Vector3 direction)
+    {
+        return !Physics.Raycast(_transform.position + Vector3.up, direction, out RaycastHit hit, _jumpDistance,
+            groundLayerMask.value);
     }
 
     public void Reset()
@@ -112,5 +131,12 @@ public class PlayerMoveSystem : MonoBehaviour
     {
         Left,
         Right
+    }
+
+    private enum LookDirection
+    {
+        Left=-90,
+        Forward=0,
+        Right=90
     }
 }

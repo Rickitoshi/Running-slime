@@ -15,5 +15,4 @@ MonoBehaviour:
   jumpDistance: 1
   jumpDuration: 0.2
   jumpHeight: 1
-  strafeDistance: 1
-  strafeDuration: 0.25
+  rotateDuration: 0.25

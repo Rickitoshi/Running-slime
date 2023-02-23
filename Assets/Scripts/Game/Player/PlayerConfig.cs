@@ -8,8 +8,7 @@ namespace Game.Player
         [SerializeField] private float jumpDistance;
         [SerializeField] private float jumpDuration;
         [SerializeField] private float jumpHeight;
-        [SerializeField] private float strafeDistance;
-        [SerializeField] private float strafeDuration;
+        [SerializeField] private float rotateDuration;
 
         public float JumpDistance => jumpDistance;
 
@@ -17,8 +16,6 @@ namespace Game.Player
 
         public float JumpHeight => jumpHeight;
 
-        public float StrafeDistance => strafeDistance;
-
-        public float StrafeDuration => strafeDuration;
+        public float RotateDuration => rotateDuration;
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Game.Managers;
 using Signals;
 using UnityEngine;
 using Zenject;
@@ -26,6 +27,7 @@ public class DungeonManager : MonoBehaviour
     private void Start()
     {
         Initialize();
+        Subscribe();
     }
     
     private void OnDestroy()
@@ -36,7 +38,6 @@ public class DungeonManager : MonoBehaviour
     private void Initialize()
     {
         InstantiateRoadPool();
-        Subscribe();
         InitializeRoad();
     }
 
@@ -102,14 +103,24 @@ public class DungeonManager : MonoBehaviour
     private void Subscribe()
     {
         _signalBus.Subscribe<PlayerJumpSignal>(UpdateDungeon);
+        _signalBus.Subscribe<ChangeGameStateSignal>(OnChangeGameState);
     }
     
     private void Unsubscribe()
     {
         _signalBus.Unsubscribe<PlayerJumpSignal>(UpdateDungeon);
+        _signalBus.Unsubscribe<ChangeGameStateSignal>(OnChangeGameState);
     }
 
-    public void Restart()
+    private void OnChangeGameState(ChangeGameStateSignal signal)
+    {
+        if (signal.State == GameState.Menu)
+        {
+            Restart();
+        }
+    }
+    
+    private void Restart()
     {
         int size = _currentRoad.Count;
         for (int i = 0; i < size; i++)

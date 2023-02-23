@@ -1,3 +1,4 @@
+using Game.Managers;
 using Signals;
 using UnityEngine;
 using Zenject;
@@ -25,12 +26,12 @@ namespace Game.Player
 
         private void Awake()
         {
-            healthSystem.OnDie += OnDie;
+            Subscribe();
         }
         
         private void OnDestroy()
         {
-            healthSystem.OnDie -= OnDie;
+           Unsubscribe(); 
         }
 
         private void Start()
@@ -45,32 +46,51 @@ namespace Game.Player
             
             if (_inputHandler.IsTouch)
             {
-                playerMoveSystem.Jump();
+                playerMoveSystem.JumpForward();
                 animationController.SetJump();
                 _signalBus.Fire<ScoreChangedSignal>();
             }
-
-            if(playerMoveSystem.IsStrafe) return;
             
             if (_inputHandler.IsLeftSwipe)
             {
                 playerMoveSystem.Strafe(PlayerMoveSystem.StrafeDirection.Left);
-                animationController.SetStrafe(PlayerMoveSystem.StrafeDirection.Left);
+                animationController.SetJump();
             }
             
             if (_inputHandler.IsRightSwipe)
             {
                 playerMoveSystem.Strafe(PlayerMoveSystem.StrafeDirection.Right);
-                animationController.SetStrafe(PlayerMoveSystem.StrafeDirection.Right);
+                animationController.SetJump();
             }
         }
 
+        private void Subscribe()
+        {
+            _signalBus.Subscribe<ChangeGameStateSignal>(OnChangeGameState);
+            healthSystem.OnDie += OnDie;
+        }
+
+        private void Unsubscribe()
+        {
+            _signalBus.Unsubscribe<ChangeGameStateSignal>(OnChangeGameState);
+            healthSystem.OnDie -= OnDie;
+        }
+
+        private void OnChangeGameState(ChangeGameStateSignal signal)
+        {
+            if (signal.State == GameState.Menu)
+            {
+                Restart();
+            }
+        }
+        
         private void OnDie()
         {
             destructionSystem.Explosion(1);
+            _signalBus.Fire<OnPlayerDieSignal>();
         }
 
-        public void Restart()
+        private void Restart()
         {
             healthSystem.Reset();
             destructionSystem.Recovery();

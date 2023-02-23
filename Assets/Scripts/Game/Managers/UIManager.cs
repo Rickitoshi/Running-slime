@@ -11,26 +11,31 @@ namespace Game.Managers
         [SerializeField] private BasePanel menuPanel;
         [SerializeField] private GamePanel gamePanel;
         [SerializeField] private BasePanel losePanel;
-        [SerializeField] private BasePanel settingsPanel;
+        [SerializeField] private SettingsPanel settingsPanel;
         [SerializeField] private BasePanel pausePanel;
         
         [Inject] private SignalBus _signalBus;
+        [Inject] private SaveSystem _saveSystem;
         [Inject] private PanelsAnimationConfig _panelsConfig;
         
         private BasePanel _currentPanel;
-        private BasePanel _pastPanel;
 
         private void Awake()
         {
-            _signalBus.Subscribe<ChangePanelUISignal>(OnChangePanel);
+            Subscribe();
         }
 
         private void Start()
         {
             menuPanel.Initialize(_panelsConfig);
-            gamePanel.Initialize(_panelsConfig, 100);
+            gamePanel.Initialize(_panelsConfig);
             losePanel.Initialize(_panelsConfig);
+            
+            settingsPanel.InitializeGraphicsToggles(_saveSystem.Data.GraphicsSettings);
+            settingsPanel.InitializeFPSToggles(_saveSystem.Data.TargetFPS);
+            settingsPanel.InitializeSoundToggle(_saveSystem.Data.IsSoundOn);
             settingsPanel.Initialize(_panelsConfig);
+            
             pausePanel.Initialize(_panelsConfig);
 
             ChangePanel(menuPanel);
@@ -38,33 +43,34 @@ namespace Game.Managers
 
         private void OnDestroy()
         {
-            _signalBus.Unsubscribe<ChangePanelUISignal>(OnChangePanel);
+           Unsubscribe();
         }
 
-        private void OnChangePanel(ChangePanelUISignal signal)
+        private void OnChangeGameState(ChangeGameStateSignal signal)
         {
-            switch (signal.Type)
+            switch (signal.State)
             {
-                case PanelType.Game:
+                case GameState.Game:
                     ChangePanel(gamePanel);
                     gamePanel.ResetScoreValue();
+                    gamePanel.InitializeCoinCounter(111);
                     break;
-                case PanelType.Menu:
+                case GameState.Menu:
                     ChangePanel(menuPanel);
                     break;
-                case PanelType.Pause:
+                case GameState.Pause:
                     ChangePanel(pausePanel);
                     break;
-                case PanelType.Lose:
-                    ChangePanel(losePanel);
-                    break;
-                case PanelType.Settings:
+                case GameState.Settings:
                     ChangePanel(settingsPanel);
                     break;
-                case PanelType.Market:
+                case GameState.Market:
                     break;
-                case PanelType.Back:
-                    ChangePanel(_pastPanel);
+                case GameState.Unpause:
+                    ChangePanel(gamePanel);
+                    break;
+                case GameState.BackToMenu:
+                    ChangePanel(menuPanel);
                     break;
             }
         }
@@ -74,22 +80,27 @@ namespace Game.Managers
             if (_currentPanel)
             {
                 _currentPanel.Deactivate();
-                _pastPanel = _currentPanel;
             }
 
             _currentPanel = newPanel;
             _currentPanel.Activate();
         }
-    }
 
-    public enum PanelType
-    {
-        Game,
-        Menu,
-        Pause,
-        Lose,
-        Settings,
-        Market,
-        Back
+        private void OnPlayerDie()
+        {
+            ChangePanel(losePanel);
+        }
+
+        private void Subscribe()
+        {
+            _signalBus.Subscribe<ChangeGameStateSignal>(OnChangeGameState);
+            _signalBus.Subscribe<OnPlayerDieSignal>(OnPlayerDie);
+        }
+
+        private void Unsubscribe()
+        {
+            _signalBus.Unsubscribe<ChangeGameStateSignal>(OnChangeGameState);
+            _signalBus.Unsubscribe<OnPlayerDieSignal>(OnPlayerDie);
+        }
     }
 }
