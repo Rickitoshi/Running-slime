@@ -17,6 +17,7 @@ public class GameSceneInstaller : MonoInstaller
     {
         Container.DeclareSignal<PlayerJumpSignal>();
         Container.DeclareSignal<ChangeGameStateSignal>();
+        Container.DeclareSignal<ChangeUIStateSignal>();
         Container.DeclareSignal<CoinsCountChangedSignal>();
         Container.DeclareSignal<ScoreChangedSignal>();
         Container.DeclareSignal<OnPlayerDieSignal>();

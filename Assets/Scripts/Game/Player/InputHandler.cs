@@ -1,5 +1,6 @@
 using Zenject;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Game.Player
 {
@@ -21,7 +22,7 @@ namespace Game.Player
 
         public void Tick()
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
             {
                 _isHold = true;
                 _startPos = Input.mousePosition;
@@ -52,7 +53,7 @@ namespace Game.Player
 
             if (IsTouch) IsTouch = false;
             
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(0) && !EventSystem.current.IsPointerOverGameObject())
             {
                 _holdTime = 0;
                 _isHold = false;

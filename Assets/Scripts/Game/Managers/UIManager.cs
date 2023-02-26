@@ -10,9 +10,11 @@ namespace Game.Managers
     {
         [SerializeField] private BasePanel menuPanel;
         [SerializeField] private GamePanel gamePanel;
+        [SerializeField] private BasePanel marketPanel;
         [SerializeField] private BasePanel losePanel;
         [SerializeField] private SettingsPanel settingsPanel;
         [SerializeField] private BasePanel pausePanel;
+        [SerializeField] private BasePanel exitPanel;
         
         [Inject] private SignalBus _signalBus;
         [Inject] private SaveSystem _saveSystem;
@@ -30,6 +32,7 @@ namespace Game.Managers
             menuPanel.Initialize(_panelsConfig);
             gamePanel.Initialize(_panelsConfig);
             losePanel.Initialize(_panelsConfig);
+            marketPanel.Initialize(_panelsConfig);
             
             settingsPanel.InitializeGraphicsToggles(_saveSystem.Data.GraphicsSettings);
             settingsPanel.InitializeFPSToggles(_saveSystem.Data.TargetFPS);
@@ -37,6 +40,7 @@ namespace Game.Managers
             settingsPanel.Initialize(_panelsConfig);
             
             pausePanel.Initialize(_panelsConfig);
+            exitPanel.Initialize(_panelsConfig);
 
             ChangePanel(menuPanel);
         }
@@ -46,31 +50,40 @@ namespace Game.Managers
            Unsubscribe();
         }
 
-        private void OnChangeGameState(ChangeGameStateSignal signal)
+        private void Subscribe()
+        {
+            _signalBus.Subscribe<ChangeUIStateSignal>(OnChangeUIState);
+            _signalBus.Subscribe<OnPlayerDieSignal>(OnPlayerDie);
+        }
+
+        private void Unsubscribe()
+        {
+            _signalBus.Unsubscribe<ChangeUIStateSignal>(OnChangeUIState);
+            _signalBus.Unsubscribe<OnPlayerDieSignal>(OnPlayerDie);
+        }
+        
+        private void OnChangeUIState(ChangeUIStateSignal signal)
         {
             switch (signal.State)
             {
-                case GameState.Game:
+                case UIState.Game:
                     ChangePanel(gamePanel);
-                    gamePanel.ResetScoreValue();
-                    gamePanel.InitializeCoinCounter(111);
                     break;
-                case GameState.Menu:
+                case UIState.Menu:
                     ChangePanel(menuPanel);
+                    gamePanel.ResetScoreValue();
                     break;
-                case GameState.Pause:
+                case UIState.Pause:
                     ChangePanel(pausePanel);
                     break;
-                case GameState.Settings:
+                case UIState.Settings:
                     ChangePanel(settingsPanel);
                     break;
-                case GameState.Market:
+                case UIState.Market:
+                    ChangePanel(marketPanel);
                     break;
-                case GameState.Unpause:
-                    ChangePanel(gamePanel);
-                    break;
-                case GameState.BackToMenu:
-                    ChangePanel(menuPanel);
+                case UIState.ExitConfirmation:
+                    ChangePanel(exitPanel);
                     break;
             }
         }
@@ -90,17 +103,16 @@ namespace Game.Managers
         {
             ChangePanel(losePanel);
         }
-
-        private void Subscribe()
-        {
-            _signalBus.Subscribe<ChangeGameStateSignal>(OnChangeGameState);
-            _signalBus.Subscribe<OnPlayerDieSignal>(OnPlayerDie);
-        }
-
-        private void Unsubscribe()
-        {
-            _signalBus.Unsubscribe<ChangeGameStateSignal>(OnChangeGameState);
-            _signalBus.Unsubscribe<OnPlayerDieSignal>(OnPlayerDie);
-        }
+    }
+    
+    public enum UIState
+    {
+        None,
+        Game,
+        Menu,
+        Pause,
+        Settings,
+        Market,
+        ExitConfirmation,
     }
 }

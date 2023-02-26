@@ -1,3 +1,4 @@
+using System;
 using Signals;
 using TMPro;
 using UnityEngine;
@@ -17,6 +18,11 @@ namespace Game.UI
             _signalBus.Subscribe<ScoreChangedSignal>(OnScoreChanged);
         }
 
+        private void Start()
+        {
+            ResetValue();
+        }
+
         private void OnDestroy()
         {
             _signalBus.Unsubscribe<ScoreChangedSignal>(OnScoreChanged);
@@ -24,7 +30,8 @@ namespace Game.UI
 
         private void OnScoreChanged()
         {
-            label.text = _currentScore++.ToString();
+            _currentScore++;
+            label.text = _currentScore.ToString();
         }
 
         public void ResetValue()

@@ -11,7 +11,6 @@ namespace Game.UI.Panels
         [SerializeField] private Toggle lowToggle;
         [Header("Target FPS")]
         [SerializeField] private Toggle toggle60;
-        [SerializeField] private Toggle toggle45;
         [SerializeField] private Toggle toggle30;
         [Header("Sound")]
         [SerializeField] private Toggle soundToggle;
@@ -35,9 +34,6 @@ namespace Game.UI.Panels
             {
                 case TargetFPS.High:
                     toggle60.isOn = true;
-                    break;
-                case TargetFPS.Medium:
-                    toggle45.isOn = true;
                     break;
                 case TargetFPS.Low:
                     toggle30.isOn = true;

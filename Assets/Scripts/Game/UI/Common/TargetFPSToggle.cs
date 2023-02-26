@@ -21,7 +21,6 @@ namespace Game.UI
     public enum TargetFPS
     {
         High=60,
-        Medium=45,
         Low=30
     }
 }

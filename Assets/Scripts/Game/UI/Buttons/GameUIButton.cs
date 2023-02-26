@@ -9,7 +9,8 @@ namespace Game.UI
 {
     public class GameUIButton : MonoBehaviour
     {
-        [SerializeField] private GameState setPanel;
+        [SerializeField] private UIState setUIState;
+        [SerializeField] private GameState setGameState;
         
         [Inject] private SignalBus _signalBus;
         private Button _button;
@@ -31,7 +32,15 @@ namespace Game.UI
 
         private void OnClick()
         {
-            _signalBus.Fire(new ChangeGameStateSignal(setPanel));
+            if (setGameState != GameState.None)
+            {
+                _signalBus.Fire(new ChangeGameStateSignal(setGameState));
+            }
+
+            if (setUIState != UIState.None)
+            {
+                _signalBus.Fire(new ChangeUIStateSignal(setUIState));
+            }
         }
     }
 }

@@ -35,6 +35,18 @@ public class DungeonManager : MonoBehaviour
        Unsubscribe();
     }
 
+    private void Subscribe()
+    {
+        _signalBus.Subscribe<PlayerJumpSignal>(UpdateDungeon);
+        _signalBus.Subscribe<ChangeGameStateSignal>(OnChangeGameState);
+    }
+    
+    private void Unsubscribe()
+    {
+        _signalBus.Unsubscribe<PlayerJumpSignal>(UpdateDungeon);
+        _signalBus.Unsubscribe<ChangeGameStateSignal>(OnChangeGameState);
+    }
+    
     private void Initialize()
     {
         InstantiateRoadPool();
@@ -98,18 +110,6 @@ public class DungeonManager : MonoBehaviour
             _partObject.Deactivate();
             _instantiatedDungeonParts.Add(_partObject);
         }
-    }
-
-    private void Subscribe()
-    {
-        _signalBus.Subscribe<PlayerJumpSignal>(UpdateDungeon);
-        _signalBus.Subscribe<ChangeGameStateSignal>(OnChangeGameState);
-    }
-    
-    private void Unsubscribe()
-    {
-        _signalBus.Unsubscribe<PlayerJumpSignal>(UpdateDungeon);
-        _signalBus.Unsubscribe<ChangeGameStateSignal>(OnChangeGameState);
     }
 
     private void OnChangeGameState(ChangeGameStateSignal signal)
