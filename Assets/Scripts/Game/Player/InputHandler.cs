@@ -1,81 +1,60 @@
-using Zenject;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Game.Player
 {
-    public class InputHandler: ITickable
+    public class InputHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IPointerClickHandler,IPointerUpHandler
     {
-        private const float SWIPE_DEAD_ZONE = 0.01f;
-        private const float CHECK_TOUCH_TIME = 0.06f;
-    
-        public bool IsLeftSwipe { get; private set; }
-        public bool IsRightSwipe { get; private set; }
-        public bool IsTouch { get; private set; }
+        private const float SWIPE_DEAD_ZONE = 5f;
 
-        private Vector3 _startPos = Vector3.zero;
-        private Vector2 _normalizeDelta =  Vector2.zero;
-        private bool _isHold;
-        private bool _isTouched;
+        public event Action<float> OnHorizontalSwap;
+        public event Action<float> OnVerticalSwap;
+        public event Action OnClick;
+
+        private Vector2 _normalizeDelta;
         private bool _isSwiped;
-        private float _holdTime;
 
-        public void Tick()
+        public void OnBeginDrag(PointerEventData eventData)
         {
-            if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
-            {
-                _isHold = true;
-                _startPos = Input.mousePosition;
-            }
+            Vector2 delta = eventData.delta;
+
+            print(delta);
             
-            if (_isHold)
-            {
-                _holdTime += Time.deltaTime;
-
-                CalculateDelta();
-                
-                if (!_isSwiped)
-                {
-                    if (Mathf.Abs(_normalizeDelta.x) > SWIPE_DEAD_ZONE)
-                    {
-                        _isSwiped = true;
-
-                        IsRightSwipe = _normalizeDelta.x > 0;
-                        IsLeftSwipe = _normalizeDelta.x < 0;
-                    }
-                }
-                else
-                {
-                    IsRightSwipe = false;
-                    IsLeftSwipe = false;
-                }
-            }
-
-            if (IsTouch) IsTouch = false;
+            if ((Mathf.Abs(delta.x + delta.y) < SWIPE_DEAD_ZONE)) return;
             
-            if (Input.GetMouseButtonUp(0) && !EventSystem.current.IsPointerOverGameObject())
-            {
-                _holdTime = 0;
-                _isHold = false;
-                _startPos = Vector3.zero;
+            _isSwiped = true;
 
-                if (_holdTime <= CHECK_TOUCH_TIME && !_isSwiped)
-                {
-                    IsTouch = true;
-                }
-                
-                _isSwiped = false;
-                IsRightSwipe = false;
-                IsLeftSwipe = false;
+            if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
+            {
+                OnHorizontalSwap?.Invoke(delta.x);
+            }
+            else
+            {
+                OnVerticalSwap?.Invoke(delta.y);
             }
         }
-
-        private void CalculateDelta()
+        
+        public void OnDrag(PointerEventData eventData)
         {
-            Vector3 delta = Input.mousePosition - _startPos;
+            
+        }
 
-            _normalizeDelta.x = delta.x / Screen.width;
-            _normalizeDelta.y = delta.y / Screen.height;
+        public void OnPointerClick(PointerEventData eventData)
+        {
+
+        }
+
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            if (_isSwiped)
+            {
+                _isSwiped = false;
+            }
+            else
+            {
+                OnClick?.Invoke();
+            }
         }
     }
 }

@@ -8,7 +8,6 @@ public class GameSceneInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.BindInterfacesAndSelfTo<SaveSystem>().AsSingle().NonLazy();
-        Container.BindInterfacesAndSelfTo<InputHandler>().AsSingle().NonLazy();
 
         BindSignals();
     }

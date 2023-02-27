@@ -2,6 +2,7 @@ using UnityEngine;
 using Game.Player;
 using DG.Tweening;
 using Signals;
+using Unity.Mathematics;
 using Zenject;
 
 public class PlayerMoveSystem : MonoBehaviour
@@ -125,6 +126,7 @@ public class PlayerMoveSystem : MonoBehaviour
         DOTween.Kill(_transform);
         IsJumping = false;
         _transform.position = _startPosition;
+        _transform.rotation = Quaternion.identity;
     }
     
     public enum StrafeDirection
