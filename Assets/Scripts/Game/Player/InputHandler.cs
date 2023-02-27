@@ -19,8 +19,6 @@ namespace Game.Player
         {
             Vector2 delta = eventData.delta;
 
-            print(delta);
-            
             if ((Mathf.Abs(delta.x + delta.y) < SWIPE_DEAD_ZONE)) return;
             
             _isSwiped = true;

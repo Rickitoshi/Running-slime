@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
   jumpDistance: 1
-  jumpDuration: 0.2
+  jumpDuration: 0.25
   jumpHeight: 1
   rotateDuration: 0.25

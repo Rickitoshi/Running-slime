@@ -18,6 +18,7 @@ namespace Game.Managers
         
         [Inject] private SignalBus _signalBus;
         [Inject] private SaveSystem _saveSystem;
+        [Inject] private Wallet _wallet;
         [Inject] private PanelsAnimationConfig _panelsConfig;
         
         private BasePanel _currentPanel;
@@ -68,6 +69,7 @@ namespace Game.Managers
             {
                 case UIState.Game:
                     ChangePanel(gamePanel);
+                    gamePanel.InitializeCoinCounter(_wallet.Coins);
                     break;
                 case UIState.Menu:
                     ChangePanel(menuPanel);

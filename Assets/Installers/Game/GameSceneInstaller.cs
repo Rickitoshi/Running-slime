@@ -8,6 +8,7 @@ public class GameSceneInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.BindInterfacesAndSelfTo<SaveSystem>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<Wallet>().AsSingle().NonLazy();
 
         BindSignals();
     }
@@ -18,6 +19,8 @@ public class GameSceneInstaller : MonoInstaller
         Container.DeclareSignal<ChangeGameStateSignal>();
         Container.DeclareSignal<ChangeUIStateSignal>();
         Container.DeclareSignal<CoinsCountChangedSignal>();
+        Container.DeclareSignal<CoinsAddSignal>();
+        Container.DeclareSignal<CoinsRemoveSignal>();
         Container.DeclareSignal<ScoreChangedSignal>();
         Container.DeclareSignal<OnPlayerDieSignal>();
         Container.DeclareSignal<GraphicsSettingsChangedSignal>();
