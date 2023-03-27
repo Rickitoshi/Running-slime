@@ -109,16 +109,21 @@ public class PlayerMoveSystem : MonoBehaviour
 
     private Vector3 CalculateJumpEndPoint(Vector3 direction)
     {
-        Vector3 rayStartPoint = _transform.position +  direction * _jumpDistance;
-       return Physics.Raycast(rayStartPoint, Vector3.down, out RaycastHit hit, 5f, groundLayerMask.value)
+        Vector3 rayStartPoint = GetPlayerPosition() + direction * _jumpDistance;
+        return Physics.Raycast(rayStartPoint, Vector3.down, out RaycastHit hit, 5f, groundLayerMask.value)
             ? hit.point
             : _transform.position;
     }
     
     private bool IsCanStrafe(Vector3 direction)
     {
-        return !Physics.Raycast(_transform.position + Vector3.up, direction, out RaycastHit hit, _jumpDistance,
+        return !Physics.Raycast(GetPlayerPosition(), direction, out RaycastHit hit, _jumpDistance,
             groundLayerMask.value);
+    }
+
+    private Vector3 GetPlayerPosition()
+    {
+        return _transform.position + Vector3.up;
     }
 
     public void Reset()
