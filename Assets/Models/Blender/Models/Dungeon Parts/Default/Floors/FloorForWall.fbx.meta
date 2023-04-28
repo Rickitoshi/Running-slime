@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bf2faad595bfb0a498858ace2bee93ef
+guid: 5371d9a7eea706c46bfbdf43531b3ffe
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert0.002
-    second: {fileID: 2100000, guid: 1f23ec8e9f46e10479e2d4619b591a3d, type: 2}
+    second: {fileID: 2100000, guid: bc08d148e11de9a41b82f51582c21c61, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -81,7 +81,7 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 0
+  importAnimation: 1
   humanDescription:
     serializedVersion: 3
     human: []
