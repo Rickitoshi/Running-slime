@@ -9,6 +9,7 @@ Unity 2021.3.5f1
 - Cinemachine
 - DOTween
 - Zenject
+- URP
 
 ## Preview
  ![alt text](ForReadme/GifForHub.gif)
